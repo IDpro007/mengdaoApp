@@ -68,6 +68,8 @@
         </div>
       </div>
     </div>
+    <footer class="mobileFooter">DreamIsland Team <br> Copyright © Mengdao  2023, All Rights Reserved </footer>
+    <footer class="webFooter">Copyright © Mengdao 2023, All Rights Reserved</footer>
   </div>
 </template>
 
@@ -104,8 +106,8 @@ const locationUrl = window.location.href
 const getCode = () => {
   const qrcode = new QRCode('QRCode',{
   text:locationUrl,
-  width:200,
-  height:200,
+  width:110,
+  height:111,
   colorDark: '#000000',
   colorLight : "#ffffff"
 })
@@ -160,6 +162,7 @@ onMounted(() => {
           line-height: 30px;
           margin: 0;
           margin-top: 10px;
+          margin-left: 8px;
         }
         .topBarButton {
           background-color: #6d2dfc;
@@ -179,7 +182,7 @@ onMounted(() => {
         font-size: 30px;
         text-align: right;
         line-height: 30px;
-        border-right: 0.1px solid #6d2dfc;
+        border-right: 1px solid #6d2dfc;
       }
     }
     .body {
@@ -191,7 +194,7 @@ onMounted(() => {
         align-items: center;
         width: 100%;
         position: relative;
-        height: 600px;
+        height: 700px;
         .downloadLink {
           position: absolute;
           display: flex;
@@ -242,16 +245,32 @@ onMounted(() => {
       }
       .pictureDiv {
         position: absolute;
-        margin-top: 260px;
+        margin-top: 220px;
         padding: 0 50px;
         .imgClass {
           text-align: center;
           width: 250px;
-          height: 500px;
+          height: 550px;
           overflow: hidden;
           border-radius: 25px;
         }
       }
+    }
+    .mobileFooter {
+      font-family: "Helvetica";
+      font-style: normal;
+      color: white;
+      font-weight: 400;
+      font-size: 13px;
+      text-align: center;
+      line-height: 15px;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+    .webFooter{
+      display: none;
     }
   }
 }
@@ -263,11 +282,11 @@ onMounted(() => {
     padding: 0;
     min-width: 600px;
     min-height: 880px;
-    background-color: #6d2dfc;
+    background: linear-gradient(66.21deg,#6d2dfc 3.51%, #5fbbe7 89.08%);
     .topbar {
       position: relative;
       width: 100vw;
-      height: 65px;
+      height: 140px;
       position: fixed;
       top: 0;
       z-index: 10;
@@ -279,10 +298,18 @@ onMounted(() => {
         border-bottom: 1px solid rgba(174, 174, 174, 0.8);
         min-height: 50px;
         min-width: 350px;
-        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: start;
+        align-items: center;
+        :deep(.van-nav-bar__content){
+          width: 100%;
+        }
         :deep(.van-nav-bar__left) {
           display: flex !important;
           padding: 0;
+          margin-left: 34px;
         }
         .topBarButton {
           display: none;
@@ -295,6 +322,7 @@ onMounted(() => {
           line-height: 30px;
           margin: 0;
           margin-top: 10px;
+          margin-left: 13px;
         }
       }
       .topBarImg {
@@ -308,6 +336,7 @@ onMounted(() => {
         font-size: 50px;
         text-align: right;
         line-height: 30px;
+        color: #6d2dfc;
         border-right: 0.1px solid #6d2dfc;
       }
     }
@@ -326,8 +355,10 @@ onMounted(() => {
         width: 100%;
         .qrCode{
           position: absolute;
-          margin-top: 400px;
-          border: 1px solid black;
+          margin-top: 230px;
+          background: #ffffff;
+          border-radius:20px;
+          padding: 7px;
         }
       }
       .mobile {
@@ -336,7 +367,7 @@ onMounted(() => {
       .titleText {
         padding: 20px;
         position: absolute;
-        top: 120px;
+        top: 150px;
         font-family: "Helvetica";
         color: white;
         display: flex;
@@ -363,14 +394,14 @@ onMounted(() => {
         position: absolute;
         margin-top: 180px;
         .imgClass {
-          width: 100%;
-          height: 550px;
+          width: 223.74px;
+          height: 483.51px;
           overflow: hidden;
           border-radius: 25px;
         }
       }
     }
-    .footer {
+    .webFooter {
       font-family: "Helvetica";
       color: white;
       font-weight: 100;
@@ -378,6 +409,9 @@ onMounted(() => {
       bottom: 20px;
       left: 50%;
       transform: translate(-50%);
+    }
+    .mobileFooter{
+      display: none;
     }
   }
 }
