@@ -3,7 +3,7 @@
     <div class="topbar">
       <NavBar fixed="true" z-index="10" clickable="true" class="topNavBar">
         <template #left>
-          <span class="topBarImg"><img src="@/assets/img/icon.png" /></span>
+          <span class="topBarImg"><img src="@/assets/img/icon_1.png" /></span>
           <span class="topBarImgText">梦岛&nbsp;</span>
           <span class="topBarTextSmall">&nbsp;满足您的一切幻想</span>
         </template>
@@ -44,14 +44,14 @@
             <div class="androidButton">
               <a ref="andiroidRef"
                 ><button type="primary" class="downloadButton">
-                  <span class="iconfont">&#xe87f;</span> 安卓下载
+                  <span class="iconfont">&#xe99b;</span> 安卓下载
                 </button></a
               >
             </div>
             <div class="IOSButton">
               <a ref="IOSRef"
                 ><button type="primary" class="downloadButton">
-                  <span class="iconfont">&#xe87e;</span> IOS下载
+                  <span class="iconfont">&#xe610;</span> IOS下载
                 </button></a
               >
             </div>
@@ -63,13 +63,17 @@
         <div class="titleText">
           <h2 class="largeText">扫码即刻下载</h2>
           <h6 class="smallerText">享受顶级服务</h6>
-          <div id="QRCode" class="qrCode">
-          </div>
+          <div id="QRCode" class="qrCode"></div>
         </div>
       </div>
     </div>
-    <footer class="mobileFooter">DreamIsland Team <br> Copyright © Mengdao  2023, All Rights Reserved </footer>
-    <footer class="webFooter">Copyright © Mengdao 2023, All Rights Reserved</footer>
+    <footer class="mobileFooter">
+      DreamIsland Team <br />
+      Copyright © Mengdao 2023, All Rights Reserved
+    </footer>
+    <footer class="webFooter">
+      Copyright © Mengdao 2023, All Rights Reserved
+    </footer>
   </div>
 </template>
 
@@ -78,7 +82,7 @@ import { NavBar, Button } from "vant";
 import { onMounted, ref } from "vue";
 import { queryDownLoadLink } from "./common";
 import { nextTick } from "vue";
-import QRCode from 'qrcodejs2-fix'
+import QRCode from "qrcodejs2-fix";
 
 const andiroidRef = ref();
 const IOSRef = ref();
@@ -101,27 +105,23 @@ const queryLink = () => {
     });
 };
 
-
-const locationUrl = window.location.href
+const locationUrl = window.location.href;
 const getCode = () => {
-  const qrcode = new QRCode('QRCode',{
-  text:locationUrl,
-  width:110,
-  height:111,
-  colorDark: '#000000',
-  colorLight : "#ffffff"
-})
-}
-
-
+  const qrcode = new QRCode("QRCode", {
+    text: locationUrl,
+    width: 110,
+    height: 111,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+  });
+};
 
 onMounted(() => {
   if (window.innerWidth >= 776) {
-    nextTick(()=>{
-      getCode()
-    })
-  }
-  else if (window.innerWidth < 776) {
+    nextTick(() => {
+      getCode();
+    });
+  } else if (window.innerWidth < 776) {
     queryLink();
   }
 });
@@ -156,15 +156,18 @@ onMounted(() => {
         } */
         .topBarTextSmall {
           font-family: "Helvetica";
-          font-weight: 100;
+          font-weight: 400;
           font-size: 15px;
           color: rgba(88, 88, 88, 0.8);
-          line-height: 30px;
-          margin: 0;
-          margin-top: 10px;
-          margin-left: 8px;
+          margin: 7px 8px 5px 8px;
         }
         .topBarButton {
+          border:none;
+          font-family: "Helvetica";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 21px;
           background-color: #6d2dfc;
           border-radius: 20px;
           min-width: 18vw;
@@ -174,15 +177,20 @@ onMounted(() => {
         }
       }
       .topBarImg {
+        scale:1;
         left: 0;
       }
       .topBarImgText {
         min-width: 60px;
         font-family: "zihun196hao-damingsong";
-        font-size: 30px;
-        text-align: right;
+        text-align: left;
         line-height: 30px;
         border-right: 1px solid #6d2dfc;
+        margin-left: 8px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
       }
     }
     .body {
@@ -200,7 +208,7 @@ onMounted(() => {
           display: flex;
           flex-direction: column;
           left: 50%;
-          margin-top: 450px;
+          margin-top: 405px;
           transform: translate(-50%, -50%);
           width: 300px;
           height: 150px;
@@ -212,6 +220,11 @@ onMounted(() => {
             height: 73px;
             border: none;
             border-radius: 40px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 21px;
+            margin: 9px 0;
           }
         }
       }
@@ -229,10 +242,10 @@ onMounted(() => {
         align-items: center;
         .largeText {
           white-space: nowrap;
-        text-align: center;
-        line-height: inherit;
-        font-weight: 400;
-        font-size: 30px;
+          text-align: center;
+          line-height: inherit;
+          font-weight: 400;
+          font-size: 30px;
         }
         .smallerText {
           white-space: nowrap;
@@ -259,7 +272,8 @@ onMounted(() => {
     .mobileFooter {
       font-family: "Helvetica";
       font-style: normal;
-      color: white;
+      color: #ffffff;
+      opacity: 70%;
       font-weight: 400;
       font-size: 13px;
       text-align: center;
@@ -269,7 +283,7 @@ onMounted(() => {
       left: 50%;
       transform: translate(-50%);
     }
-    .webFooter{
+    .webFooter {
       display: none;
     }
   }
@@ -282,7 +296,7 @@ onMounted(() => {
     padding: 0;
     min-width: 600px;
     min-height: 880px;
-    background: linear-gradient(66.21deg,#6d2dfc 3.51%, #5fbbe7 89.08%);
+    background: linear-gradient(66.21deg, #6d2dfc 3.51%, #5fbbe7 89.08%);
     .topbar {
       position: relative;
       width: 100vw;
@@ -303,7 +317,7 @@ onMounted(() => {
         flex-wrap: nowrap;
         justify-content: start;
         align-items: center;
-        :deep(.van-nav-bar__content){
+        :deep(.van-nav-bar__content) {
           width: 100%;
         }
         :deep(.van-nav-bar__left) {
@@ -316,16 +330,15 @@ onMounted(() => {
         }
         .topBarTextSmall {
           font-family: "Helvetica";
-          font-weight: 100;
+          font-weight: 400;
           font-size: 25px;
-          color: rgba(88, 88, 88, 0.8);
+          color: #757575;
           line-height: 30px;
-          margin: 0;
-          margin-top: 10px;
-          margin-left: 13px;
+          margin: 7px 8px 5px 8px;
         }
       }
       .topBarImg {
+        scale:1;
         left: 0;
       }
       .topBarImgText {
@@ -353,11 +366,11 @@ onMounted(() => {
         justify-content: center;
         align-items: center;
         width: 100%;
-        .qrCode{
+        .qrCode {
           position: absolute;
           margin-top: 230px;
           background: #ffffff;
-          border-radius:20px;
+          border-radius: 20px;
           padding: 7px;
         }
       }
@@ -378,21 +391,30 @@ onMounted(() => {
           white-space: nowrap;
           text-align: center;
           line-height: inherit;
+          font-family: 'Helvetica';
+          font-style: normal;
           font-weight: 400;
           font-size: 30px;
+          line-height: 34px;
+          letter-spacing: -0.05em;
+          color: #FFFFFF;
         }
         .smallerText {
           white-space: nowrap;
           margin-top: 100px;
           position: absolute;
+          font-family: 'Helvetica';
+          font-style: normal;
+          font-weight: 400;
           font-size: 16px;
-          font-weight: 100;
           line-height: 18px;
+          letter-spacing: -0.05em;
+          color: rgba(255, 255, 255, 0.75);
         }
       }
       .pictureDiv {
         position: absolute;
-        margin-top: 180px;
+        margin-top: 152px;
         .imgClass {
           width: 223.74px;
           height: 483.51px;
@@ -402,36 +424,39 @@ onMounted(() => {
       }
     }
     .webFooter {
-      font-family: "Helvetica";
-      color: white;
-      font-weight: 100;
+      font-family: 'PingFang SC';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+      letter-spacing: 0.1px;
+      color: rgba(255, 255, 255, 0.6);
       position: absolute;
-      bottom: 20px;
+      bottom: 70px;
       left: 50%;
       transform: translate(-50%);
     }
-    .mobileFooter{
+    .mobileFooter {
       display: none;
     }
   }
 }
 
 @font-face {
-  font-family: "iconfont"; /* Project id 4045900 */
-  src: url("//at.alicdn.com/t/c/font_4045900_qbil1riydcn.woff2?t=1682861302042")
-      format("woff2"),
-    url("//at.alicdn.com/t/c/font_4045900_qbil1riydcn.woff?t=1682861302042")
-      format("woff"),
-    url("//at.alicdn.com/t/c/font_4045900_qbil1riydcn.ttf?t=1682861302042")
-      format("truetype");
+  font-family: 'iconfont';  /* Project id 4045900 */
+  src: url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff2?t=1684225625955') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff?t=1684225625955') format('woff'),
+       url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.ttf?t=1684225625955') format('truetype');
 }
 .iconfont {
+  position: absolute;
   font-family: "iconfont" !important;
-  font-size: 24px;
+  font-size: 30px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+  left: 39px;
 }
 a:visited {
   color: inherit; /* 或者你想要的颜色 */
