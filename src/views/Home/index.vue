@@ -1,9 +1,9 @@
 <template>
   <div class="containerPage">
-    <div class="topbar">
+    <header class="topbar">
       <NavBar fixed="true" z-index="10" clickable="true" class="topNavBar">
         <template #left>
-          <span class="topBarImg"><img src="@/assets/img/icon_1.png" /></span>
+          <span class="topBarImg"><img src="@assets/img/icon_1.png" /></span>
           <span class="topBarImgText">梦岛&nbsp;</span>
           <span class="topBarTextSmall">&nbsp;满足您的一切幻想</span>
         </template>
@@ -16,7 +16,7 @@
           >
         </template>
       </NavBar>
-    </div>
+    </header>
     <div class="body">
       <div class="pictureCom">
         <div class="titleText">
@@ -24,16 +24,25 @@
           <h6 class="smallerText">网罗台湾、大陆高质量美女</h6>
         </div>
         <div class="pictureDiv">
-          <img class="imgClass" src="@/assets/img/mengdao2.jpg" />
+          <img class="imgClass" src="@assets/img/mengdao2.jpg" />
         </div>
       </div>
       <div class="pictureCom">
         <div class="titleText">
           <h2 class="largeText">声音甜美听指挥</h2>
+          <h6 class="smallerText">嗲嗲的台湾腔你心动吗</h6>
+        </div>
+        <div class="pictureDiv">
+          <img class="imgClass" src="@assets/img/mengdao1.jpg" />
+        </div>
+      </div>
+      <div class="pictureCom">
+        <div class="titleText">
+          <h2 class="largeText">语音聊天</h2>
           <h6 class="smallerText">甜美的声音只为您服务</h6>
         </div>
         <div class="pictureDiv">
-          <img class="imgClass" src="@/assets/img/mengdao1.jpg" />
+          <img class="imgClass" src="@assets/img/mating.png" />
         </div>
       </div>
       <div class="pictureCom mobile">
@@ -48,13 +57,13 @@
                 </button></a
               >
             </div>
+            <RouterLink to="IOSHelp">
             <div class="IOSButton">
-              <a ref="IOSRef"
-                ><button type="primary" class="downloadButton">
-                  <span class="iconfont">&#xe610;</span> IOS下载
-                </button></a
-              >
-            </div>
+              <button type="primary" class="downloadButton">
+                    <span class="iconfont">&#xe610;</span> IOS下载
+                  </button>
+                </div>
+              </RouterLink>
           </div>
         </div>
         <div></div>
@@ -83,9 +92,10 @@ import { onMounted, ref } from "vue";
 import { queryDownLoadLink } from "./common";
 import { nextTick } from "vue";
 import QRCode from "qrcodejs2-fix";
+import { RouterLink } from 'vue-router'
 
 const andiroidRef = ref();
-const IOSRef = ref();
+// const IOSRef = ref();
 
 const downloadPositionClick = (selector) => {
   document.querySelector(selector).scrollIntoView({
@@ -94,11 +104,12 @@ const downloadPositionClick = (selector) => {
   });
 };
 
+
 const queryLink = () => {
   queryDownLoadLink()
     .then((res) => {
       andiroidRef.value.href = res.data.payload.android_download_url;
-      IOSRef.value.href = res.data.payload.ios_download_url;
+      // IOSRef.value.href = res.data.payload.ios_download_url;
     })
     .catch((error) => {
       alert(error);
@@ -116,6 +127,7 @@ const getCode = () => {
   });
 };
 
+
 onMounted(() => {
   if (window.innerWidth >= 776) {
     nextTick(() => {
@@ -130,15 +142,17 @@ onMounted(() => {
 <style lang="less" scoped>
 @media screen and (max-width: 766px) {
   .containerPage {
+    min-width: 442px;
     position: relative;
     margin: 0;
     padding: 0;
     background-color: #6d2dfc;
+    overflow: hidden;
     .topbar {
       position: relative;
       width: 100%;
       height: 65px;
-      position: fixed;
+      position:fixed;
       top: 0;
       z-index: 10;
 
@@ -150,10 +164,9 @@ onMounted(() => {
         min-height: 50px;
         min-width: 350px;
         padding-top: 20px;
-        /* :deep(.van-nav-bar__left) {
-          display: flex !important;
+        :deep(.van-nav-bar__left) {
           padding: 0;
-        } */
+        }
         .topBarTextSmall {
           font-family: "Helvetica";
           font-weight: 400;
@@ -162,7 +175,9 @@ onMounted(() => {
           margin: 7px 8px 5px 8px;
         }
         .topBarButton {
-          border:none;
+          height: 46px;
+          width: 115.59px;
+          border: none;
           font-family: "Helvetica";
           font-style: normal;
           font-weight: 700;
@@ -170,27 +185,23 @@ onMounted(() => {
           line-height: 21px;
           background-color: #6d2dfc;
           border-radius: 20px;
-          min-width: 18vw;
-          min-height: 3vh;
-          right: -10px;
-          margin-top: 10px;
         }
       }
       .topBarImg {
-        scale:1;
+        margin-right: -10px;
+        scale: 0.7;
         left: 0;
       }
       .topBarImgText {
+        height: 31px;
         min-width: 60px;
         font-family: "zihun196hao-damingsong";
         text-align: left;
-        line-height: 30px;
         border-right: 1px solid #6d2dfc;
-        margin-left: 8px;
         font-style: normal;
         font-weight: 400;
         font-size: 30px;
-        line-height: 36px;
+        line-height: 31px;
       }
     }
     .body {
@@ -270,6 +281,7 @@ onMounted(() => {
       }
     }
     .mobileFooter {
+      width: 336px;
       font-family: "Helvetica";
       font-style: normal;
       color: #ffffff;
@@ -279,7 +291,7 @@ onMounted(() => {
       text-align: center;
       line-height: 15px;
       position: absolute;
-      bottom: 20px;
+      bottom: 40px;
       left: 50%;
       transform: translate(-50%);
     }
@@ -338,7 +350,7 @@ onMounted(() => {
         }
       }
       .topBarImg {
-        scale:1;
+        scale: 1;
         left: 0;
       }
       .topBarImgText {
@@ -391,19 +403,19 @@ onMounted(() => {
           white-space: nowrap;
           text-align: center;
           line-height: inherit;
-          font-family: 'Helvetica';
+          font-family: "Helvetica";
           font-style: normal;
           font-weight: 400;
           font-size: 30px;
           line-height: 34px;
           letter-spacing: -0.05em;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         .smallerText {
           white-space: nowrap;
           margin-top: 100px;
           position: absolute;
-          font-family: 'Helvetica';
+          font-family: "Helvetica";
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
@@ -424,7 +436,7 @@ onMounted(() => {
       }
     }
     .webFooter {
-      font-family: 'PingFang SC';
+      font-family: "PingFang SC";
       font-style: normal;
       font-weight: 400;
       font-size: 13px;
@@ -443,10 +455,13 @@ onMounted(() => {
 }
 
 @font-face {
-  font-family: 'iconfont';  /* Project id 4045900 */
-  src: url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff2?t=1684225625955') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff?t=1684225625955') format('woff'),
-       url('//at.alicdn.com/t/c/font_4045900_nyajp681pt9.ttf?t=1684225625955') format('truetype');
+  font-family: "iconfont"; /* Project id 4045900 */
+  src: url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff2?t=1684225625955")
+      format("woff2"),
+    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff?t=1684225625955")
+      format("woff"),
+    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.ttf?t=1684225625955")
+      format("truetype");
 }
 .iconfont {
   position: absolute;

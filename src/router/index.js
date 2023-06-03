@@ -7,14 +7,32 @@ const routes = [
   },
   {
     path: '/Home',
-    name: 'mengdaoApp',
-    component: () => import('@/views/Home/index.vue')
+    name: 'Home',
+    component: () => import('../views/Home/index.vue')
   },
   {
-    path: '/webPage',
-    name: 'webPage',
-    component: () => import('@/views/webPage/index.vue')
-  }
+    path: '/IOSHelp',
+    name: 'IOSHelp',
+    component: () => import('../views/IOSHelp/IOSHelp.vue')
+  },
+  {
+    path: '/charts',
+    name: 'charts',
+    component: () => import('../views/charts/charts.vue')
+  },
+  /* {
+    path: '/Home',
+    name: 'Home',
+    component: () => import('../views/Home/index.vue'),  
+    children: [
+      {
+        path: '/IOSHelp/IOSHelp',
+        name: 'IOSHelp',
+        component: () => import('../views/IOSHelp/IOSHelp.vue'),
+      }]
+  } */
+  
+
 ] 
  
 const router = createRouter({

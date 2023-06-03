@@ -1,4 +1,7 @@
 <template>
-  <RouterLink to="/Home">Home</RouterLink>
-        <RouterLink to="/webPage">About</RouterLink>
+  <RouterView />
 </template>
+
+<script setup>
+import { RouterView } from 'vue-router';
+</script>

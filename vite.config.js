@@ -2,11 +2,34 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import styleImport, { VantResolve } from "vite-plugin-style-import";
 import path from "path"
+import externalGlobals from "rollup-plugin-external-globals";
+import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import'
 // https://vitejs.dev/config/
 export default defineConfig({
   base:'./',
   plugins: [
     vue(),
+    /* importToCDN({
+      modules: [
+          autoComplete('vue'),
+          {
+              name: 'vue-demi',
+              var: 'VueDemi',
+              path: "lib/index.iife.min.js",
+          },
+          {
+              name: 'pinia',
+              var: 'Pinia',
+              path: 'dist/pinia.iife.min.js'
+          }
+      ],
+  }), */
+  /* externalGlobals({
+    vue: "Vue",
+    "element-plus": "ElementPlus",
+    // 👇 配置 vue-demi 全局变量 👇
+    "vue-demi": "VueDemi",
+  }), */
     styleImport({
       resolves: [VantResolve()],
       libs: [
