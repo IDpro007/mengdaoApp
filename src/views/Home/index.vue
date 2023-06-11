@@ -3,17 +3,10 @@
     <header class="topbar">
       <NavBar fixed="true" z-index="10" clickable="true" class="topNavBar">
         <template #left>
-          <span class="topBarImg"><img src="@assets/img/icon_1.png" /></span>
-          <span class="topBarImgText">梦岛&nbsp;</span>
-          <span class="topBarTextSmall">&nbsp;满足您的一切幻想</span>
+          <img src="../../assets/img/topbar.jpg" class="topbarImgClass">
         </template>
         <template #right>
-          <Button
-            type="primary"
-            class="topBarButton"
-            @click="downloadPositionClick('#downloadPosition')"
-            >下载App</Button
-          >
+          <Button type="primary" class="topBarButton" @click="downloadPositionClick('#downloadPosition')">下载App</Button>
         </template>
       </NavBar>
     </header>
@@ -51,22 +44,26 @@
           <h6 class="smallerText">享受顶级服务</h6>
           <div class="downloadLink">
             <div class="androidButton">
-              <a ref="andiroidRef"
-                ><button type="primary" class="downloadButton">
+              <a ref="andiroidRef"><button type="primary" class="downloadButton" >
                   <span class="iconfont">&#xe99b;</span> 安卓下载
-                </button></a
-              >
+                </button></a>
             </div>
+            <!-- <a ref="IOSRef" @click="IOSClick"> -->
             <RouterLink to="IOSHelp">
-            <div class="IOSButton">
-              <button type="primary" class="downloadButton">
+              <div class="IOSButton">
+                <button type="primary" class="downloadButton" @click="changeIOSRef">
+                  <!-- window.location.href=`${IOSRef.value}` -->
                     <span class="iconfont">&#xe610;</span> IOS下载
                   </button>
                 </div>
               </RouterLink>
+            <!-- </a> -->
+            <p class="describeText">
+          下载或使用中遇到问题，请联系微信客服：mengdaokefu
+        </p>
           </div>
+          
         </div>
-        <div></div>
       </div>
       <div class="pictureCom web">
         <div class="titleText">
@@ -74,6 +71,9 @@
           <h6 class="smallerText">享受顶级服务</h6>
           <div id="QRCode" class="qrCode"></div>
         </div>
+        <p class="describeText">
+          下载或使用中遇到问题，请联系微信客服：mengdaokefu
+        </p>
       </div>
     </div>
     <footer class="mobileFooter">
@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { NavBar, Button } from "vant";
+import { NavBar, Button, Locale } from "vant";
 import { onMounted, ref } from "vue";
 import { queryDownLoadLink } from "./common";
 import { nextTick } from "vue";
@@ -95,7 +95,7 @@ import QRCode from "qrcodejs2-fix";
 import { RouterLink } from 'vue-router'
 
 const andiroidRef = ref();
-// const IOSRef = ref();
+const IOSRef = ref();
 
 const downloadPositionClick = (selector) => {
   document.querySelector(selector).scrollIntoView({
@@ -104,17 +104,25 @@ const downloadPositionClick = (selector) => {
   });
 };
 
-
 const queryLink = () => {
   queryDownLoadLink()
     .then((res) => {
       andiroidRef.value.href = res.data.payload.android_download_url;
-      // IOSRef.value.href = res.data.payload.ios_download_url;
+      IOSRef.value = res.data.payload.ios_download_url;
+      console.log(IOSRef.value,'ref')
+      console.log(res.data.payload.ios_download_url,'res.data.payload.ios_download_url')
     })
     .catch((error) => {
       alert(error);
     });
 };
+
+function changeIOSRef (){
+  console.log(IOSRef.value, 'this')
+  return window.location.href = IOSRef.value
+}
+
+
 
 const locationUrl = window.location.href;
 const getCode = () => {
@@ -126,6 +134,12 @@ const getCode = () => {
     colorLight: "#ffffff",
   });
 };
+
+/* const IOSClick = () => {
+  console.log(window.location, 'url')
+  console.log(111, IOSRef.value.href, '123')
+  locationUrl = 'itms-services://?action=download-manifest&url=https%3A%2F%2Fdkmc6a83p5n6j.cloudfront.net%2Fpkg%2Fios%2Fp12.plist'
+} */
 
 
 onMounted(() => {
@@ -142,31 +156,33 @@ onMounted(() => {
 <style lang="less" scoped>
 @media screen and (max-width: 766px) {
   .containerPage {
-    min-width: 442px;
     position: relative;
+    width: 100vw;
     margin: 0;
     padding: 0;
     background-color: #6d2dfc;
     overflow: hidden;
     .topbar {
       position: relative;
-      width: 100%;
+      width: 100vw;
       height: 65px;
-      position:fixed;
+      position: fixed;
       top: 0;
       z-index: 10;
-
       .topNavBar {
         position: relative;
         height: 100%;
         width: 100%;
-        border-bottom: 1px solid #aeaead;
         min-height: 50px;
         min-width: 350px;
         padding-top: 20px;
+        .topbarImgClass{
+          width: 70%;
+        }
         :deep(.van-nav-bar__left) {
           padding: 0;
         }
+
         .topBarTextSmall {
           font-family: "Helvetica";
           font-weight: 400;
@@ -174,6 +190,7 @@ onMounted(() => {
           color: rgba(88, 88, 88, 0.8);
           margin: 7px 8px 5px 8px;
         }
+
         .topBarButton {
           height: 46px;
           width: 115.59px;
@@ -184,14 +201,16 @@ onMounted(() => {
           font-size: 18px;
           line-height: 21px;
           background-color: #6d2dfc;
-          border-radius: 20px;
+          border-radius: 40px;
         }
       }
+
       .topBarImg {
         margin-right: -10px;
         scale: 0.7;
         left: 0;
       }
+
       .topBarImgText {
         height: 31px;
         min-width: 60px;
@@ -204,8 +223,10 @@ onMounted(() => {
         line-height: 31px;
       }
     }
+
     .body {
       width: 100%;
+
       .pictureCom {
         display: flex;
         flex-direction: column;
@@ -214,6 +235,7 @@ onMounted(() => {
         width: 100%;
         position: relative;
         height: 700px;
+
         .downloadLink {
           position: absolute;
           display: flex;
@@ -224,6 +246,8 @@ onMounted(() => {
           width: 300px;
           height: 150px;
           justify-content: space-between;
+          align-items: center;
+
           .downloadButton {
             font-family: "Helvetica";
             background-color: #000000;
@@ -238,10 +262,21 @@ onMounted(() => {
             margin: 9px 0;
           }
         }
+        .describeText{
+          width: 195px;
+          font-family: "Helvetica";
+          font-weight: 400;
+          font-size: 12px;
+          color: #cecece;
+          line-height: 30px;
+          text-align: center;
+        }
       }
+
       .web {
         display: none;
       }
+
       .titleText {
         position: absolute;
         top: 80px;
@@ -251,6 +286,7 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .largeText {
           white-space: nowrap;
           text-align: center;
@@ -258,6 +294,7 @@ onMounted(() => {
           font-weight: 400;
           font-size: 30px;
         }
+
         .smallerText {
           white-space: nowrap;
           margin-top: 100px;
@@ -267,10 +304,12 @@ onMounted(() => {
           line-height: 18px;
         }
       }
+
       .pictureDiv {
         position: absolute;
         margin-top: 220px;
         padding: 0 50px;
+
         .imgClass {
           text-align: center;
           width: 250px;
@@ -280,6 +319,7 @@ onMounted(() => {
         }
       }
     }
+
     .mobileFooter {
       width: 336px;
       font-family: "Helvetica";
@@ -295,6 +335,7 @@ onMounted(() => {
       left: 50%;
       transform: translate(-50%);
     }
+
     .webFooter {
       display: none;
     }
@@ -309,6 +350,7 @@ onMounted(() => {
     min-width: 600px;
     min-height: 880px;
     background: linear-gradient(66.21deg, #6d2dfc 3.51%, #5fbbe7 89.08%);
+
     .topbar {
       position: relative;
       width: 100vw;
@@ -321,7 +363,6 @@ onMounted(() => {
         position: relative;
         height: 100%;
         width: 100%;
-        border-bottom: 1px solid rgba(174, 174, 174, 0.8);
         min-height: 50px;
         min-width: 350px;
         display: flex;
@@ -329,17 +370,25 @@ onMounted(() => {
         flex-wrap: nowrap;
         justify-content: start;
         align-items: center;
+        .topbarImgClass{
+          width: 100%;
+          height: 140px;
+        }
+
         :deep(.van-nav-bar__content) {
           width: 100%;
         }
+
         :deep(.van-nav-bar__left) {
           display: flex !important;
           padding: 0;
           margin-left: 34px;
         }
+
         .topBarButton {
           display: none;
         }
+
         .topBarTextSmall {
           font-family: "Helvetica";
           font-weight: 400;
@@ -349,10 +398,12 @@ onMounted(() => {
           margin: 7px 8px 5px 8px;
         }
       }
+
       .topBarImg {
         scale: 1;
         left: 0;
       }
+
       .topBarImgText {
         min-width: 60px;
         margin-left: 20px;
@@ -365,11 +416,13 @@ onMounted(() => {
         border-right: 0.1px solid #6d2dfc;
       }
     }
+
     .body {
       display: flex;
       flex-direction: row;
       width: 100%;
       height: 100vh;
+
       .pictureCom {
         min-width: 255px;
         min-height: 850px;
@@ -378,6 +431,7 @@ onMounted(() => {
         justify-content: center;
         align-items: center;
         width: 100%;
+
         .qrCode {
           position: absolute;
           margin-top: 230px;
@@ -385,10 +439,22 @@ onMounted(() => {
           border-radius: 20px;
           padding: 7px;
         }
+        .describeText{
+          margin-top: 50px;
+          height: 30px;
+          font-family: "Helvetica";
+          font-weight: 400;
+          font-size: 14px;
+          color: #d3d3d3;
+          line-height: 30px;
+          width: 195px;
+        }
       }
+
       .mobile {
         display: none;
       }
+
       .titleText {
         padding: 20px;
         position: absolute;
@@ -399,6 +465,7 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         .largeText {
           white-space: nowrap;
           text-align: center;
@@ -411,6 +478,7 @@ onMounted(() => {
           letter-spacing: -0.05em;
           color: #ffffff;
         }
+
         .smallerText {
           white-space: nowrap;
           margin-top: 100px;
@@ -424,9 +492,11 @@ onMounted(() => {
           color: rgba(255, 255, 255, 0.75);
         }
       }
+
       .pictureDiv {
         position: absolute;
         margin-top: 152px;
+
         .imgClass {
           width: 223.74px;
           height: 483.51px;
@@ -435,6 +505,7 @@ onMounted(() => {
         }
       }
     }
+
     .webFooter {
       font-family: "PingFang SC";
       font-style: normal;
@@ -448,6 +519,7 @@ onMounted(() => {
       left: 50%;
       transform: translate(-50%);
     }
+
     .mobileFooter {
       display: none;
     }
@@ -455,14 +527,13 @@ onMounted(() => {
 }
 
 @font-face {
-  font-family: "iconfont"; /* Project id 4045900 */
-  src: url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff2?t=1684225625955")
-      format("woff2"),
-    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff?t=1684225625955")
-      format("woff"),
-    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.ttf?t=1684225625955")
-      format("truetype");
+  font-family: "iconfont";
+  /* Project id 4045900 */
+  src: url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff2?t=1684225625955") format("woff2"),
+    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.woff?t=1684225625955") format("woff"),
+    url("//at.alicdn.com/t/c/font_4045900_nyajp681pt9.ttf?t=1684225625955") format("truetype");
 }
+
 .iconfont {
   position: absolute;
   font-family: "iconfont" !important;
@@ -473,12 +544,14 @@ onMounted(() => {
   -moz-osx-font-smoothing: grayscale;
   left: 39px;
 }
+
 a:visited {
-  color: inherit; /* 或者你想要的颜色 */
+  color: inherit;
+  /* 或者你想要的颜色 */
 }
+
 a {
   color: #ffffff;
 
   text-decoration: none;
-}
-</style>
+}</style>

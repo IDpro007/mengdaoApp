@@ -2,24 +2,24 @@ import { createRouter, createWebHistory } from 'vue-router'
  
 const routes = [
   {
-    path: '/',
-    redirect: '/Home'
+    path: "/Home",
+    redirect: "/",
   },
   {
-    path: '/Home',
-    name: 'Home',
-    component: () => import('../views/Home/index.vue')
+    path: "/IOSHelp",
+    redirect: "/",
   },
   {
-    path: '/IOSHelp',
-    name: 'IOSHelp',
-    component: () => import('../views/IOSHelp/IOSHelp.vue')
+    path: "/",
+    name: "Home",
+    component: () => import("../views/Home/index.vue"),
   },
   {
-    path: '/charts',
-    name: 'charts',
-    component: () => import('../views/charts/charts.vue')
+    path: "/IOSHelp",
+    name: "IOSHelp",
+    component: () => import("../views/IOSHelp/IOSHelp.vue"),
   },
+
   /* {
     path: '/Home',
     name: 'Home',
@@ -31,13 +31,20 @@ const routes = [
         component: () => import('../views/IOSHelp/IOSHelp.vue'),
       }]
   } */
-  
-
-] 
+]; 
  
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savePosition) {
+    // return 期望滚动到哪个的位置
+    return { x: 0, y: 0 };
+  },
 })
+router.beforeEach((to, from, next) => {
+  // 让页面回到顶部
+  document.documentElement.scrollTop = 0;
+  next();
+});
  
 export default router

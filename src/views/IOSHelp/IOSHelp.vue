@@ -3,12 +3,10 @@
     <header class="topbar">
       <NavBar fixed="true" z-index="10" clickable="true" class="topNavBar">
         <template #left>
-          <span class="topBarImg"><img src="@assets/img/icon_1.png" /></span>
-          <span class="topBarImgText">梦岛&nbsp;</span>
-          <span class="topBarTextSmall">&nbsp;满足您的一切幻想</span>
+          <img src="../../assets/img/topbar.jpg" class="topbarImgClass">
         </template>
         <template #right>
-          <RouterLink to="Home">
+          <RouterLink to="/">
           <Button
             type="primary"
             class="topBarButton"
@@ -16,66 +14,77 @@
           >
           </RouterLink>
         </template>
-      </NavBar>
+        </NavBar>
     </header>
     <body>
       <h2 class="pageTitle">iOS安装指南</h2>
       <div class="imgText">
         <div class="pictureCom">
-          <h6 class="pictureComText">第一步：点击“下载APP”，再点击“安装”</h6>
+          <h6 class="pictureComText">第一步：点击“打开”(若没有直接进入第二步)</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/1.png"
               alt=""
               class="pictureComImg"
             />
           </div>
         </div>
         <div class="pictureCom">
-          <h6 class="pictureComText">第二步：返回手机桌面，待梦岛APP安装完成后，点击应用图标</h6>
+          <h6 class="pictureComText">第二步：点击“安装”</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/2.png"
               alt=""
               class="pictureComImg"
             />
           </div>
         </div>
         <div class="pictureCom">
-          <h6 class="pictureComText">第三步：记住下图中的证书名称，并点击取消</h6>
+          <h6 class="pictureComText">第三步：返回手机桌面，待梦岛APP安装完成后，点击应用图标</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/3.png"
+              alt=""
+              class="pictureComImg"
+              style="height:227px;"
+            />
+          </div>
+        </div>
+        <div class="pictureCom">
+          <h6 class="pictureComText">第四步：记住下图中的证书名称，点击取消</h6>
+          <div class="pictureComImgDiv">
+            <img
+              src="@assets/img/4.png"
               alt=""
               class="pictureComImg"
             />
           </div>
         </div>
         <div class="pictureCom">
-          <h6 class="pictureComText">第四步：进入「设置」-「通用」-「设备管理」</h6>
+          <h6 class="pictureComText">第五步：进入「设置」-「通用」-「设备管理」</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/5.png"
               alt=""
               class="pictureComImg"
             />
           </div>
         </div>
         <div class="pictureCom">
-          <h6 class="pictureComText">第五步：找到对应的证书，点击进入</h6>
+          <h6 class="pictureComText">第六步：找到对应的证书，点击进入</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/6.jpg"
               alt=""
               class="pictureComImg"
             />
           </div>
         </div>
         <div class="pictureCom">
-          <h6 class="pictureComText">第六步：找到并点击信任该证书，最后返回手机桌面，点击应用图标，即可打开梦岛APP</h6>
+          <h6 class="pictureComText">第七步：点击信任该证书后，返回手机桌面，点击应用图标，即可打开梦岛APP</h6>
           <div class="pictureComImgDiv">
             <img
-              src="@assets/img/iosHelp1.png"
+              src="@assets/img/7.png"
               alt=""
               class="pictureComImg"
             />
@@ -97,7 +106,7 @@ import { NavBar, Button } from "vant";
 
 <style lang="less" scoped>
 .containerPage {
-  min-width: 442px;
+  width: 100vw;
   margin: 0;
   padding: 0;
   background-color: #6d2dfc;
@@ -116,7 +125,6 @@ import { NavBar, Button } from "vant";
       position: relative;
       height: 100%;
       width: 100%;
-      border-bottom: 1px solid #aeaead;
       min-height: 50px;
       min-width: 350px;
       padding-top: 20px;
@@ -140,8 +148,11 @@ import { NavBar, Button } from "vant";
         font-size: 18px;
         line-height: 21px;
         background-color: #6d2dfc;
-        border-radius: 20px;
+        border-radius: 40px;
       }
+      .topbarImgClass{
+          width: 70%;
+        }
     }
     .topBarImg {
       margin-right: -10px;
@@ -161,7 +172,7 @@ import { NavBar, Button } from "vant";
     }
   }
   .pageTitle {
-      margin-top: 50px;
+      margin-top: 130px;
       color: #ffffff;
       text-align: center;
       font-family: "Helvetica";
@@ -194,7 +205,7 @@ import { NavBar, Button } from "vant";
       .pictureComImgDiv {
         .pictureComImg{
         width: 300px;
-        height: 196.66px;
+        height: 200px;
         border-radius: 20px;
       }
       }
